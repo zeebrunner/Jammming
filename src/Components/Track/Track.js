@@ -1,37 +1,42 @@
 import React from 'react';
+import './Track.css';
 
 class Track extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.addTrack=this.addTrack.bind(this);
-    this.removeTrack=this.removeTrack.bind(this);
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
 
-  addTrack(track){
+  addTrack() {
     this.props.onAdd(this.props.track);
   }
-  removeTrack(track){
+
+  removeTrack() {
     this.props.onRemove(this.props.track);
   }
 
   renderAction() {
-      if (this.props.isRemoval) {
-        return <a className='Track-action' onClick={this.addTrack}>+</a>;
-      } else {
-        return <a className='Track-action' onClick={this.removeTrack}>-</a>;
-      }
+    if (this.props.isRemoval) {
+      return <a className="Track-action" onClick={this.removeTrack} > - </a>
+    } else {
+      return <a className="Track-action" onClick={this.addTrack} > + </a>
     }
+  }
 
-  render(){
-    return(
-      <div className="Track">
+  render() {
+    return (
+      <div className="Track" key={this.props.track.id}>
+        <div className="Track-album-img">
+          <img src={this.props.track.albumimg} alt="album art" />
+        </div>
         <div className="Track-information">
           <h3>{this.props.track.name}</h3>
-          <p>{this.props.track.artist} | {this.props.track.album}</p>
+          <p> {this.props.track.artist} | {this.props.track.album} </p>
         </div>
         {this.renderAction()}
       </div>
-    )
+    );
   }
 }
 
